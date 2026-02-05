@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Anmol Application for Azure Cloud Training</title>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 40px;
+      background-color: lightgrey;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 60%;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    th {
+      background: #f4f4f4;
+    }
+    .azure-image {
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h2><em> User List </em></h2>
+    <img id="azureImage" class="azure-image" width="200" />
+  </div>
+  <div>
+    <button onclick="fetchData()">Fetch Data</button>
+    <button onclick="loadImage()">Load Image</button>
+    <button onclick="triggerFunctionApp()">Check Func App</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="grid"></tbody>
+  </table>
+
+  <script>
+    function fetchData() {
+      fetch('/api/users')
+        .then(res => res.json())
+        .then(data => {
+          const grid = document.getElementById('grid');
+          grid.innerHTML = '';
+          data.forEach(u => {
+            grid.innerHTML += `<tr><td>${u.id}</td><td>${u.name}</td><td>${u.email}</td></tr>`;
+          });
+        });
+    }
+    function loadImage() {
+      fetch('/api/image-url')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('azureImage').src = data.url;
+        });
+    }
+    function triggerFunctionApp() {
+      fetch("/api/trigger-function")
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Failed to trigger Function App");
+      });
+
+    }
+  </script>
+</body>
+
+</html>

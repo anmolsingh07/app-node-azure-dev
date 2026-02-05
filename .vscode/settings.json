@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/64c9e215-6315-4992-8901-3480f29ee9b5/resourceGroups/RG-APP-Anmol-Assign-DEV/providers/Microsoft.Web/sites/as-app-anmol-dev",
+    "appService.deploySubpath": "."
+}
