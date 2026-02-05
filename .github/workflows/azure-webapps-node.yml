@@ -21,6 +21,11 @@ on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: false
+        default: 'main'
 
 env:
   AZURE_WEBAPP_NAME: as-app-anmol-dev    # set this to your application's name
